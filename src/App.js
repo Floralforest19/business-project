@@ -3,25 +3,19 @@ import { Switch, Route, useHistory } from "react-router-dom";
 import "./App.css";
 import UserKit from "./data/UserKit";
 import WelcomePage from "./components/WelcomePage";
-import RegisterUser from './components/RegisterUser';
-import CustomerDetail from './components/CustomerDetail';
-
-
+import RegisterUser from "./components/RegisterUser";
+import CustomerDetail from "./components/CustomerDetail";
 
 function App() {
- 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
- 
- 
+
   const userKit = new UserKit();
   const history = useHistory();
   // Use URL Search Params to parse the query parameters from the url
   const params = new URLSearchParams(history.location.search);
   const uid = params.get("uid");
   const token = params.get("token");
-
-
 
   function handleActivateAccount() {
     userKit.activateUser(uid, token).then(history.push("/login"));
@@ -32,27 +26,27 @@ function App() {
       .login(email, password)
       .then((res) => res.json())
       .then((data) => {
+        if (!data.token) {
+          alert("Invalid login");
+          return false;
+        }
+
         userKit.setToken(data.token);
         history.push("/welcome");
       });
   }
 
-
-
-
-
   return (
     <div>
       <Switch>
-      
         <Route path="/login">
+          <h1>Activate account</h1>
           {uid && token ? (
             <div>
-              <h1>Activate account</h1>
-              <button onClick={handleActivateAccount()}>Activate User</button>
+              Your account is being activated
+              <button onClick={handleActivateAccount()}></button>
             </div>
-          ):(
-          
+          ) : (
             <div>
               <h2>Welcome and login</h2>
               <input
@@ -74,18 +68,17 @@ function App() {
           )}
         </Route>
         <Route path="/register-user">
-        <RegisterUser />
+          <RegisterUser />
         </Route>
 
         <Route path="/welcome">
-         <WelcomePage />
+          <WelcomePage />
         </Route>
 
         <Route path="/customer-detail">
           <CustomerDetail />
         </Route>
       </Switch>
-
     </div>
   );
 }

@@ -4,17 +4,29 @@ const AUTH_URL = `${ROOT_URL}auth/`;
 const LOGIN_URL = `${ROOT_URL}api-token-auth/`;
 
 export default class {
-    async register(firstName, lastName, email, password, organisationName, organisationKind) {
-        const url = `${ROOT_URL}auth/users/create/`
-        const payload = {
-            firstName, lastName, email, password, organisationName, organisationKind
-        }
-        console.log(payload)
-        return fetch(url, {
-            method: "POST",
-            headers: this.getPublicHeaders(),
-            body: JSON.stringify(payload)
-        })
+  async register(
+    firstName,
+    lastName,
+    email,
+    password,
+    organisationName,
+    organisationKind
+  ) {
+    const url = `${ROOT_URL}auth/users/create/`;
+    const payload = {
+      firstName,
+      lastName,
+      email,
+      password,
+      organisationName,
+      organisationKind,
+    };
+    console.log(payload);
+    return fetch(url, {
+      method: "POST",
+      headers: this.getPublicHeaders(),
+      body: JSON.stringify(payload),
+    });
   }
 
   async activateUser(uid, token) {
@@ -34,7 +46,7 @@ export default class {
     const url = `${LOGIN_URL}`;
     const payload = {
       email,
-      password
+      password,
     };
     return fetch(url, {
       method: "POST",
@@ -44,7 +56,8 @@ export default class {
   }
 
   async getCustomerList() {
-      const url = `${API_URL}customers/`;
+    const url = `${API_URL}customers/`;
+
     console.log(url);
     console.log(this.getPrivateHeaders());
     return fetch(url, {
@@ -53,9 +66,7 @@ export default class {
   }
 
   async createCustomer(payload) {
-      const url = `${API_URL}customers/`;
-      console.log(url);
-      console.log(this.getPrivateHeaders());
+    const url = `${API_URL}customers/`;
     return fetch(url, {
       method: "POST",
       headers: this.getPrivateHeaders(),
@@ -80,7 +91,7 @@ export default class {
   getPrivateHeaders() {
     return {
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${this.getToken()}`,
+      Authorization: `Bearer ${this.getToken()}`,
     };
   }
 }
