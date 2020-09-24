@@ -34,7 +34,7 @@ export default class {
     const url = `${LOGIN_URL}`;
     const payload = {
       email,
-      password,
+      password
     };
     return fetch(url, {
       method: "POST",
@@ -80,7 +80,7 @@ export default class {
   getPrivateHeaders() {
     return {
       "Content-Type": "application/json",
-      Authorization: `Bearer ${this.getToken()}`,
+      "Authorization": `Bearer ${this.getToken()}`,
     };
   }
 }
