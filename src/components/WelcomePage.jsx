@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
+import styled from 'styled-components';
+
+
+
+const Text = styled.p`
+color: mediumpurple;
+font-size:1rem;
+`
+
+
 
 export default function WelcomePage() {
   const [customerList, setCustomerList] = useState([]);
@@ -26,14 +36,27 @@ export default function WelcomePage() {
       });
   }
 
+  var user = userKit.getUser()
+  console.log(user)
+
   return (
     <div>
-      <h1>Welcome </h1>
+      <h1>Welcome {user.firstName}</h1>
 
       <button onClick={fetchClients}>Get customers</button>
       {customerList.map((customerItem) => {
-          
-        return <p>{customerItem.name}</p>;
+
+      return <Text>
+        Id: {customerItem.id},  
+        Name: {customerItem.name}, 
+      OrganisationNr: {customerItem.organisationNr},
+      VatNr: {customerItem.vatNr},
+      Reference: {customerItem.reference},
+      Payment-term: {customerItem.paymentTerm},
+      Website: {customerItem.website},
+      Email: {customerItem.email},
+      Phonenumber: {customerItem.phoneNumber}
+      </Text>;
       })}
 
       <button onClick={() => history.push("/customer-detail")}>

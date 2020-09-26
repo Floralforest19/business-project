@@ -73,6 +73,19 @@ export default class {
       body: JSON.stringify(payload),
     });
   }
+  async getMe () {
+      const url = `${AUTH_URL}me/`;
+      return fetch(url, {
+          method: "GET",
+          headers: this.getPrivateHeaders()
+      });
+  }
+  setUser(user) {
+      localStorage.setItem("BUSINESS_USER", JSON.stringify(user));
+  }
+  getUser() {
+      return JSON.parse(localStorage.getItem("BUSINESS_USER"));
+  }
 
   setToken(token) {
     localStorage.setItem("BUSINESS_TOKEN", token);

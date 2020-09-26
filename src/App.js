@@ -9,6 +9,7 @@ import CustomerDetail from "./components/CustomerDetail";
 function App() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState({});
 
   const userKit = new UserKit();
   const history = useHistory();
@@ -26,13 +27,23 @@ function App() {
       .login(email, password)
       .then((res) => res.json())
       .then((data) => {
+        console.log(data)
         if (!data.token) {
           alert("Invalid login");
           return false;
         }
 
         userKit.setToken(data.token);
-        history.push("/welcome");
+        userKit.getMe()
+        .then((res) => res.json())
+        .then((data) => {
+          if (!data){
+            alert("Invalid");
+            return false;
+          }
+           userKit.setUser(data);
+           history.push("/welcome");
+        })
       });
   }
 
