@@ -57,14 +57,17 @@ export default class {
 
   async getCustomerList() {
     const url = `${API_URL}customers/`;
-
-    console.log(url);
-    console.log(this.getPrivateHeaders());
     return fetch(url, {
       headers: this.getPrivateHeaders(),
     });
   }
 
+  async getCustomer(id) {
+      const url = `${API_URL}customers/${id}/`;
+      return fetch(url, {
+        headers: this.getPrivateHeaders()
+      });
+  }
   async createCustomer(payload) {
     const url = `${API_URL}customers/`;
     return fetch(url, {

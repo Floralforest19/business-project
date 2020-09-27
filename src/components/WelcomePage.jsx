@@ -1,16 +1,12 @@
 import React, { useState, useEffect } from "react";
 import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
-import styled from 'styled-components';
+import styled from "styled-components";
 
-
-
-const Text = styled.p`
-color: mediumpurple;
-font-size:1rem;
-`
-
-
+const P = styled.p`
+  color: blue;
+  font-size: 1rem;
+`;
 
 export default function WelcomePage() {
   const [customerList, setCustomerList] = useState([]);
@@ -36,33 +32,30 @@ export default function WelcomePage() {
       });
   }
 
-  var user = userKit.getUser()
-  console.log(user)
+  var user = userKit.getUser();
 
   return (
     <div>
-      <h1>Welcome {user.firstName}</h1>
-
+      <h1>
+        Welcome {user.firstName} {user.lastName} {user.email}
+      </h1>
       <button onClick={fetchClients}>Get customers</button>
+      <br /> <br />
       {customerList.map((customerItem) => {
-
-      return <Text>
-        Id: {customerItem.id},  
-        Name: {customerItem.name}, 
-      OrganisationNr: {customerItem.organisationNr},
-      VatNr: {customerItem.vatNr},
-      Reference: {customerItem.reference},
-      Payment-term: {customerItem.paymentTerm},
-      Website: {customerItem.website},
-      Email: {customerItem.email},
-      Phonenumber: {customerItem.phoneNumber}
-      </Text>;
+        return (
+          <P
+            onClick={() =>
+              history.push("/customer-detail?id=" + customerItem.id)
+            }
+            key={customerItem.id}
+          >
+            {customerItem.website}
+          </P>
+        );
       })}
-
-      <button onClick={() => history.push("/customer-detail")}>
+      <button onClick={() => history.push("/customer-create")}>
         Create new customer
       </button>
-
       <button onClick={() => history.push("/login")}>Log out</button>
     </div>
   );

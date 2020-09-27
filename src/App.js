@@ -4,6 +4,7 @@ import "./App.css";
 import UserKit from "./data/UserKit";
 import WelcomePage from "./components/WelcomePage";
 import RegisterUser from "./components/RegisterUser";
+import CreateCustomer from "./components/CreateCustomer";
 import CustomerDetail from "./components/CustomerDetail";
 
 function App() {
@@ -84,6 +85,10 @@ function App() {
 
         <Route path="/welcome">
           <WelcomePage />
+        </Route>
+
+        <Route path="/customer-create">
+          <CreateCustomer />
         </Route>
 
         <Route path="/customer-detail">
