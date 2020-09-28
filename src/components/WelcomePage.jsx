@@ -3,9 +3,21 @@ import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
+
+
+const H1 = styled.h1`
+  font-size: 1, 2rem;
+  color: lightcoral;
+  margin-left: 3%;
+`;
 const P = styled.p`
   color: blue;
   font-size: 1rem;
+  margin-left: 3%;
+`;
+const Button = styled.button`
+  margin-left: 3%;
+  margin-bottom: 2%;
 `;
 
 export default function WelcomePage() {
@@ -36,10 +48,11 @@ export default function WelcomePage() {
 
   return (
     <div>
-      <h1>
-        Welcome {user.firstName} {user.lastName} {user.email}
-      </h1>
-      <button onClick={fetchClients}>Get customers</button>
+      <H1>
+        Welcome {user.firstName} {user.lastName} <br /> 
+        {user.email}
+      </H1>
+      <Button onClick={fetchClients}>Get customers</Button>
       <br /> <br />
       {customerList.map((customerItem) => {
         return (
@@ -53,9 +66,9 @@ export default function WelcomePage() {
           </P>
         );
       })}
-      <button onClick={() => history.push("/customer-create")}>
+      <Button onClick={() => history.push("/customer-create")}>
         Create new customer
-      </button>
+      </Button>
       <button onClick={() => history.push("/login")}>Log out</button>
     </div>
   );

@@ -6,6 +6,30 @@ import WelcomePage from "./components/WelcomePage";
 import RegisterUser from "./components/RegisterUser";
 import CreateCustomer from "./components/CreateCustomer";
 import CustomerDetail from "./components/CustomerDetail";
+import styled from 'styled-components';
+
+
+const H1 = styled.h1`
+  font-size: 1, 2rem;
+  color: lightcoral;
+  margin-left: 3%;
+`;
+const H2 = styled.h2`
+  font-size: 1, 1rem;
+  color: lightcoral;
+  margin-left: 3%;
+`;
+const Div = styled.div`
+  background: lavenderblush;
+  width: 70%;
+  margin: 0% 0%;
+  border: 2px solid black;
+`;
+const Divloggin = styled.div`
+  width: 60%;
+  color: lightcoral;
+  padding: 16px;
+`;
 
 function App() {
   const [email, setEmail] = useState("");
@@ -49,18 +73,18 @@ function App() {
   }
 
   return (
-    <div>
+    <Div>
       <Switch>
         <Route path="/login">
-          <h1>Activate account</h1>
+          <H1>Activate account</H1>
           {uid && token ? (
             <div>
               Your account is being activated
               <button onClick={handleActivateAccount()}></button>
             </div>
           ) : (
-            <div>
-              <h2>Welcome and login</h2>
+            <Divloggin>
+              <H2>Welcome and login</H2>
               <input
                 placeholder="email"
                 value={email}
@@ -76,7 +100,7 @@ function App() {
               <button onClick={() => history.push("/register-user")}>
                 Create account
               </button>
-            </div>
+            </Divloggin>
           )}
         </Route>
         <Route path="/register-user">
@@ -95,7 +119,7 @@ function App() {
           <CustomerDetail />
         </Route>
       </Switch>
-    </div>
+    </Div>
   );
 }
 

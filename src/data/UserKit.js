@@ -68,6 +68,13 @@ export default class {
         headers: this.getPrivateHeaders()
       });
   }
+  async deleteCustomer(id) {
+      const url =`${API_URL}customers/${id}/`;
+      return fetch(url, {
+          method:"DELETE",
+          headers: this.getPrivateHeaders()
+      });
+  }
   async createCustomer(payload) {
     const url = `${API_URL}customers/`;
     return fetch(url, {

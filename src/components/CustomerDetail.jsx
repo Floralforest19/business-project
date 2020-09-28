@@ -6,17 +6,17 @@ import styled from 'styled-components';
 
 const H1 = styled.h1`
 font-size: 1,1rem;
-color: blue;
+color: lightcoral;
 `
 
 
 const P = styled.p`
   font-size: 1rem;
-  color: blue;
-  background: whitesmoke;
+  color: lightcoral;
 `;
 const Div = styled.div`
-  padding: 20px;
+  padding: 22px;
+  background: lavenderblush;
 `
 const InnerDiv = styled.div`
 widht: 55px;
@@ -43,6 +43,12 @@ export default function CustomerDetail() {
       .then((data) => {
         setCustomerView(data);
       });
+  }
+
+
+  function customerDelete() {
+    userKit
+      .deleteCustomer(id);
   }
 
   return (
@@ -73,6 +79,14 @@ export default function CustomerDetail() {
         }}
       >
         Go back
+      </button>
+      <button
+        onClick={() => {
+            customerDelete();
+          history.push("/welcome");
+        }}
+      >
+        Delete
       </button>
     </Div>
   );
