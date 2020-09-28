@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import '../App';
 import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
 import styled from 'styled-components';
@@ -9,7 +10,7 @@ color: blue;
 `
 
 
-const Text = styled.text`
+const P = styled.p`
   font-size: 1rem;
   color: blue;
   background: whitesmoke;
@@ -19,7 +20,7 @@ const Div = styled.div`
 `
 const InnerDiv = styled.div`
 widht: 55px;
-height: 75px;
+
 
 `
 
@@ -40,7 +41,6 @@ export default function CustomerDetail() {
       .getCustomer(id)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setCustomerView(data);
       });
   }
@@ -49,7 +49,7 @@ export default function CustomerDetail() {
     <Div>
       <InnerDiv>
         <H1>Customer {customerView.id}</H1>
-        <Text>
+        <P>
           Name: {customerView.name}
           <br /> <br />
           OrgNr: {customerView.organisationNr}
@@ -65,8 +65,15 @@ export default function CustomerDetail() {
           Email: {customerView.email}
           <br /> <br />
           Phonenumber: {customerView.phoneNumber}
-        </Text>
+        </P>
       </InnerDiv>
+      <button
+        onClick={() => {
+          history.push("/welcome");
+        }}
+      >
+        Go back
+      </button>
     </Div>
   );
 }

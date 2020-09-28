@@ -1,6 +1,17 @@
 import React, { useState } from "react";
 import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
+import styled from 'styled-components';
+
+
+const Renderinput = styled.div`
+  width: 60%;
+  margin: 0 auto;
+`
+const Renderinputinner = styled.div`
+  width: 50%;
+`;
+
 
 export default function App() {
   const [name, setName] = useState([]);
@@ -21,6 +32,7 @@ export default function App() {
 
   function renderInput(
     index,
+    label,
     placeholder,
     stateVariable,
     stateSetVariable,
@@ -28,7 +40,7 @@ export default function App() {
   ) {
     return (
       <div key={index}>
-        <label>{placeholder}</label>
+        <label> {label} </label>
         <input
           type={inputtype}
           placeholder={placeholder}
@@ -39,14 +51,14 @@ export default function App() {
     );
   }
   const inputObjects = [
-    ["First Name", name, setName, "text"],
-    ["OrganisationNr", organisationNr, setOrganisationNR, "text"],
-    ["VatNr", vatNr, setVatNr, "text"],
-    ["Reference", reference, setReference, "text"],
-    ["PaymentTerm", paymentTerm, setPaymentTerm, "number"],
-    ["Website", website, setWebsite, "text"],
-    ["Email", email, setEmail, "email"],
-    ["PhoneNumber", phoneNumber, setPhoneNumber, "number"],
+    ["First Name:", "Name", name, setName, "text"],
+    ["OrganisationNr:", "OrgNr", organisationNr, setOrganisationNR, "text"],
+    ["VatNr:", "SE + 123456789", vatNr, setVatNr, "text"],
+    ["Reference:", "Reference", reference, setReference, "text"],
+    ["PaymentTerm:", "PaymentTerm", paymentTerm, setPaymentTerm, "number"],
+    ["Website:", "Website.se", website, setWebsite, "text"],
+    ["Email:", "Email@email.com", email, setEmail, "email"],
+    ["PhoneNumber:", "000-0000000", phoneNumber, setPhoneNumber, "number"],
   ];
 
   function handleCreateCustomer() {
@@ -73,19 +85,20 @@ export default function App() {
   }
 
   return (
-    <div>
+    <Renderinput>
       <h1>Register details</h1>
-      <div>
+      <Renderinputinner>
         {inputObjects.map((inputItem, index) => {
           return renderInput(
             index,
             inputItem[0],
             inputItem[1],
             inputItem[2],
-            inputItem[3]
+            inputItem[3],
+            inputItem[4]
           );
         })}
-      </div>
+      </Renderinputinner>
       <button
         onClick={() => {
           handleCreateCustomer();
@@ -96,12 +109,18 @@ export default function App() {
       </button>
       <button
         onClick={() => {
+          if (!/^[SE]{2}\d{10}$/.test(vatNr)) {
+            alert(
+              "Invalid Vat number. Should be SE plus ten digits. Eg SE1234567890"
+            );
+            return false;
+          }
           handleCreateCustomer();
           history.push("/welcome");
         }}
       >
         Create Customer
       </button>
-    </div>
+    </Renderinput>
   );
 }

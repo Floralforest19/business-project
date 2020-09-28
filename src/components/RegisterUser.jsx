@@ -1,6 +1,38 @@
 import React, {useState} from 'react'
 import UserKit from '../data/UserKit'
 import {useHistory} from 'react-router-dom'
+import styled from 'styled-components';
+
+const H1 = styled.h1`
+font-size: 1,2rem;
+color: lightcoral;
+margin-left: 3%;
+`
+const H3 = styled.h3`
+  font-size: 1, 1rem;
+  color: lightcoral;
+  margin-left: 3%;
+`;
+
+
+const Div = styled.div`
+  background: lavenderblush;
+  width: 70%;
+  margin: 0% 0%;
+  border: 2px solid black;
+`
+const Divinner = styled.div`
+width: 60%;
+color: lightcoral;
+padding: 16px;
+`
+const ButtonC = styled.button`
+margin-left: 3%;
+margin-bottom: 2%;
+`
+const ButtonL = styled.button`
+margin-left: 2%;
+`
 
 export default function App() {
 
@@ -29,12 +61,12 @@ export default function App() {
         );
     }
     const inputObjects = [
-        ["First Name", firstName, setFirstName],
-        ["Last Name", lastName, setLastName],
-        ["Email", email, setEmail],
-        ["Password", password, setPassword],
-        ["Organisation Name", organisationName, setOrganisationName],
-        ["Organisation Kind (0,1,2)", organisationKind, setOrganisationKind],
+        ["First Name: ", firstName, setFirstName],
+        ["Last Name: ", lastName, setLastName],
+        ["Email: ", email, setEmail],
+        ["Password: ", password, setPassword],
+        ["Organisation Name: ", organisationName, setOrganisationName],
+        ["Organisation Kind (0,1,2): ", organisationKind, setOrganisationKind],
     ];
 
     function handleCreateUser() {
@@ -59,10 +91,10 @@ export default function App() {
     }
 
     return (
-        <div>
-            <h1>Register</h1>
-            <h3>Enter details to register</h3>
-            <div>
+        <Div>
+            <H1>Register</H1>
+            <H3>Enter details to register</H3>
+            <Divinner>
                 {inputObjects.map((inputItem, index) => {
                     return renderInput(
                         index,
@@ -71,16 +103,16 @@ export default function App() {
                         inputItem[2]
                     );
                 })}
-            </div>
-            <button onClick={handleCreateUser}>Create User</button>
-            <button
+            </Divinner>
+            <ButtonC onClick={handleCreateUser}>Create User</ButtonC>
+            <ButtonL
                 onClick={() => {
                     handleActivateAccount();
                     history.push("/login");
                 }}
             >
                 Login
-          </button>
-        </div>
+          </ButtonL>
+        </Div>
     )
 }
