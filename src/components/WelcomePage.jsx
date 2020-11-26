@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
+import { UserContext } from "../context/UserContext";
 import UserKit from "../data/UserKit";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-
-
 
 const H1 = styled.h1`
   font-size: 1, 2rem;
@@ -21,7 +20,7 @@ const Button = styled.button`
 `;
 
 export default function WelcomePage() {
-  const [customerList, setCustomerList] = useState([]);
+  const { customerList, setCustomerList } = useContext(UserContext);
   const userKit = new UserKit();
   const history = useHistory();
   const params = new URLSearchParams(history.location.search);
@@ -49,7 +48,7 @@ export default function WelcomePage() {
   return (
     <div>
       <H1>
-        Welcome {user.firstName} {user.lastName} <br /> 
+        Welcome {user.firstName} {user.lastName} <br />
         {user.email}
       </H1>
       <Button onClick={fetchClients}>Get customers</Button>

@@ -19,10 +19,10 @@ const Div = styled.div`
   background: lavenderblush;
   width: 70%;
   margin: 0% 0%;
-  border: 2px solid black;
+ 
 `
 const Divinner = styled.div`
-width: 60%;
+width: 70%;
 color: lightcoral;
 padding: 16px;
 `
